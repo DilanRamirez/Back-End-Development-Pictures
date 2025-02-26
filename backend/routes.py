@@ -35,7 +35,8 @@ def count():
 ######################################################################
 @app.route("/picture", methods=["GET"])
 def get_pictures():
-    pass
+    # Return the list of URLs as JSON
+    return jsonify(data)
 
 ######################################################################
 # GET A PICTURE
@@ -44,7 +45,12 @@ def get_pictures():
 
 @app.route("/picture/<int:id>", methods=["GET"])
 def get_picture_by_id(id):
-    pass
+    # Search for the picture with the matching id in the data list
+    for picture in data:
+        if picture.get("id") == id:
+            return jsonify(picture)
+    # If not found, return a 404 error
+    abort(404)
 
 
 ######################################################################
